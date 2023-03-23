@@ -5,13 +5,10 @@ from models.registered_course import RegisteredCourse
 from models.admin import admin_required
 from db import db
 from schemas import *
-from sqlalchemy.exc import SQLAlchemyError, IntegrityError
-from schemas import StudentRegSchema,StudentUpdateSchema,StudentSchema
+from schemas import StudentRegSchema,StudentUpdateSchema
 from passlib.hash import pbkdf2_sha256
 from flask_jwt_extended import jwt_required, get_jwt_identity
-import os
-import sqlite3
-import sys
+
 
 
 
@@ -22,6 +19,7 @@ blp =  Blueprint('Students', 'students', description='Operation on Students')
 @blp.route('/student_id/<string:email>')
 class GetStudent(MethodView):
     @blp.response(200, StudentOutputSchema)
+    @blp.doc(description='Get a student\'s stud_id (i.e matric number) by email')
     def get(self,email):
         student = Student.query.filter_by(email=email).first()
         if not student:
@@ -32,6 +30,7 @@ class GetStudent(MethodView):
 @blp.route('/student_id')
 class GetStudent(MethodView):
     @blp.response(200, StudentDataSchema)
+    @blp.doc(description='Get an authenticated student\'s profile')
     @jwt_required()
     def get(self):
         matric_no = get_jwt_identity()
@@ -41,6 +40,7 @@ class GetStudent(MethodView):
 
     #   To change password   ---Student only
     @blp.arguments(UpdateStudentPassword)
+    @blp.doc(description='Update a student\'s password')
     @jwt_required()
     def patch(self, password_data):
         matric_no = get_jwt_identity()
@@ -79,6 +79,7 @@ class RegisterStudent(MethodView):
     @admin_required
     @blp.arguments(StudentRegSchema)
     @blp.response(201, PlainStudentSchema)
+    @blp.doc(description='Register a Student')
     def post(self, student_data):
         student = Student.query.filter_by(email=student_data['email']).first()
         if student:
@@ -102,6 +103,8 @@ class RegisterStudent(MethodView):
     @jwt_required()
     @admin_required
     @blp.response(200, PlainStudentSchema(many=True))
+    @blp.doc(description='Get all students',
+             summary='Get all registered students with their details')
     def get(self):
         students = Student.query.all()
         
@@ -114,6 +117,7 @@ class GetUpdateDeleteStudent(MethodView):
     @jwt_required()
     @admin_required
     @blp.response(200,StudentDataSchema)
+    @blp.doc(description='Get a student details by matric_no')
     def get(self,matric_no):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:
@@ -124,6 +128,7 @@ class GetUpdateDeleteStudent(MethodView):
     @admin_required
     @blp.arguments(StudentUpdateSchema)
     @blp.response(200, StudentDataSchema)
+    @blp.doc(description='Update a student details by matric_no')
     def put(self, student_data, matric_no):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:
@@ -140,6 +145,7 @@ class GetUpdateDeleteStudent(MethodView):
     
     @jwt_required()
     @admin_required
+    @blp.doc(description='Delete a student details by matric_no')
     def delete(self, matric_no):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:
@@ -153,8 +159,9 @@ class GetUpdateDeleteStudent(MethodView):
 @blp.route('/student/courses-grade/')
 class StudentRegisteredCourse(MethodView):
     @jwt_required()
-    # @blp.arguments(ListStudentRegisteredCourse)
     @blp.response(200, ListStudentRegisteredCourse(many=True))
+    @blp.doc(description='Get a student course details by matric_no',
+             summary='This display all the course datails with grade')
     def get(self):
         matric_no = get_jwt_identity()
         registered_course = RegisteredCourse.query.filter_by(matric_no=matric_no).all()
@@ -169,6 +176,8 @@ class StudentRegisteredCourse(MethodView):
 class StudentGpaCalculation(MethodView):
     @jwt_required()
     @admin_required
+    @blp.doc(description='Get a student GPA',
+             summary='This display the GPA of a student using a 4 point grading system')
     def patch(self,matric_no):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:

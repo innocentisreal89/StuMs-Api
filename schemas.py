@@ -54,7 +54,7 @@ class PlainStudentRegisteredCourse(Schema):
 
 
 
-#   Registrations Schema
+#   Registrations Schemas
 class CourseRegSchema(Schema):  #   Handles the Course Registration/Creation---used
     id = fields.Int(dump_only=True)
     course_title =fields.Str(required=True)
@@ -94,7 +94,7 @@ class LoginSchema(Schema): # For Reg.----used
 
 
 
-#   Display Schema
+#   Display Schemas
 class StudentDataSchema(Schema):        #   This is used to display student details to only logged in sudent
     firstName = fields.Str(required=True)
     lastName = fields.Str(required=True)
@@ -127,7 +127,7 @@ class AdminSchema(Schema):  #used
     email = fields.Str(required=True)
 
 
-class CourseDisplaySchema(Schema):   # Id of aa course--used
+class CourseDisplaySchema(Schema):   # Id of a course
     id = fields.Int(dump_only=True)
     course_title = fields.Str(required=True)
     course_code = fields.Str(required=True)
@@ -142,38 +142,14 @@ class StudentDisplaySchema(Schema):  #ID of a student  and will be displayed in 
     department = fields.Str(required=True)
     level = fields.Str(required=True) #used
 
-class StudentRegisteredCourseDisplay(Schema):
+class StudentRegisteredCourseDisplay(Schema):   #used
     course_code =fields.Str(required=True)
     course_unit =fields.Int(dump_only=True)
     score = fields.Float(dump_only=True)
     course_grade = fields.Str(dump_only=True)
     course_grade_status = fields.Str(required=True)
-    matric_no = fields.Int(dump_only=True)#used
+    matric_no = fields.Int(dump_only=True)
     
-# class StudentSchema(StudentDisplaySchema):
-#     # courses = fields.Nested(StudentRegisteredCourseDisplay())
-#     courses = fields.List(fields.Nested(StudentRegisteredCourseDisplay()), dump_only=True)  
-
-# #   This Schemas Nest the Id of course and student to display
-# class CourseSchema(CourseDisplaySchema):
-#     students = fields.List(fields.Nested(StudentRegisteredCourseDisplay()), dump_only=True)
-#     # students = fields.List(fields.Nested(StudentDisplaySchema()), dump_only=True)
-
-# # class StudentSchema(StudentDisplaySchema):
-# #     courses = fields.List(fields.Nested(CourseDisplaySchema()), dump_only=True)
-
-# class UserSchema(Schema):
-#     pass
-
-# #Association schema
-# # class StudentCourseRegSchema(Schema):
-# #     # course_id = fields.Nested(CourseSchema)
-# #     # student_id = fields.Nested(StudentSchema)
-# #     id = fields.Int(dump_only=True)
-# #     course_title =fields.Str(required=True)
-# #     course_code =fields.Str(required=True)
-# #     course_unit =fields.Int(required=True)
-# #     matric_no = fields.Int(required=True)
 
 class StudentSchema(StudentDisplaySchema):  #used
     courses_registered = fields.Nested(StudentCourseRegSchema(), many=True)
@@ -210,14 +186,8 @@ class StudentUpdateSchema(Schema):# only admin can use this--used
     semester = fields.Str()
    
 
-# class StudentCourseUpdateSchema(Schema):    #used
-#     score = fields.Float()
-#     course_grade = fields.Str()
-#     course_grade_status = fields.Str()
-
-
 #update studdent Password
-class UpdateStudentPassword(Schema):#used
+class UpdateStudentPassword(Schema):    #used
     new_password =fields.Str(required=True)
     confirm_password =fields.Str(required=True)
     

@@ -62,7 +62,7 @@ def create_app(config=config_dict['dev']):
         )
 
 
-    #   Register the namespace
+    #   Register the blueprints
     api.register_blueprint(AdminBlueprint)
     api.register_blueprint(StudentBlueprint)
     api.register_blueprint(CourseBlueprint)

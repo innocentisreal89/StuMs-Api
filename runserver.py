@@ -1,4 +1,3 @@
-
 from main import create_app
 from config.config import config_dict 
 

@@ -19,6 +19,7 @@ class RegisterCourse(MethodView):
     @admin_required
     @blp.arguments(CourseRegSchema)
     @blp.response(201, PlainCourseSchema)
+    @blp.doc(description='Register a Course')
     def post(self, course_data):
         course = Course.query.filter_by(course_code=course_data['course_code']).first()
         if course:
@@ -36,6 +37,7 @@ class RegisterCourse(MethodView):
     #Get all registered course      -- Both Admin and Student have access here
     @jwt_required()
     @blp.response(200, CourseDisplaySchema(many=True))
+    @blp.doc(description='Get all avaliable courses')
     def get(self):
         courses = Course.query.all()
         if not courses:
@@ -48,6 +50,7 @@ class GetUpdateDeleteCourse(MethodView):
     @jwt_required()
     @admin_required
     @blp.response(200, CourseDisplaySchema)
+    @blp.doc(description='Getting a Course by course code')
     def get(self, course_code):
         course = Course.query.filter_by(course_code=course_code).first()
         if not course:
@@ -59,6 +62,7 @@ class GetUpdateDeleteCourse(MethodView):
     @admin_required
     @blp.arguments(CourseUpdateSchema)
     @blp.response(200, PlainCourseSchema)
+    @blp.doc(description='Upload a Course by Course Code')
     def put(self,course_data, course_code):
         course = Course.query.filter_by(course_code=course_code).first()
         if not course:
@@ -74,6 +78,7 @@ class GetUpdateDeleteCourse(MethodView):
     #Delete a course
     @jwt_required()
     @admin_required
+    @blp.doc(description='Delete a Course by Course Code')
     def delete(self, course_code):
         course = Course.query.filter_by(course_code=course_code).first()
         if not course:
@@ -93,6 +98,7 @@ class GetUploadStudentGrade(MethodView):
     @admin_required
     @blp.arguments(StudentCourseUpdateSchema)
     @blp.response(200, PlainStudentRegisteredCourse)
+    @blp.doc(description='Upload a Particular Student Grade in a Course ')
     def put(self,grade_data, matric_no, course_code):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:
@@ -116,6 +122,7 @@ class GetUploadStudentGrade(MethodView):
     @jwt_required()
     @admin_required
     @blp.response(200,  StudentRegisteredCourseDisplay)
+    @blp.doc(description='Get a Student Grade for each Course')
     def get(self,matric_no, course_code):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:
@@ -135,6 +142,7 @@ class GetUploadStudentGrade(MethodView):
 class RegisterStudent(MethodView):
     @jwt_required()
     @admin_required
+    @blp.doc(description='Get all Registered Admins')
     @blp.response(200, AdminSchema(many=True))
     def get(self):
         admins = AdminModel.query.all()
@@ -147,6 +155,7 @@ class StudentRegisteredInCourse(MethodView):
     @jwt_required()
     @admin_required
     @blp.response(200, StudentSchema(many=True))
+    @blp.doc(description='Get all Student that Registered for a Course')
     def get(self, course_code):
         course = Course.query.filter_by(course_code=course_code).first()
         if not course:
@@ -162,6 +171,7 @@ class RegisterCourse(MethodView):
     @jwt_required()
     @blp.arguments(StudentCourseRegSchema)
     @blp.response(200, CourseSchema)
+    @blp.doc(description='Course Registration by Student')
     def post(self,course_data):
         matric_no=get_jwt_identity()
         student = Student.query.filter_by(matric_no=matric_no).first()
@@ -194,6 +204,8 @@ class DeleteStudentCourse(MethodView):
     #admin required here
     @jwt_required()
     @admin_required
+    @blp.doc(description='Deleting a Course from a Student',
+             summary='Deleting Course from a Student registered Courses')
     def delete(self, matric_no,course_code):
         student = Student.query.filter_by(matric_no=matric_no).first()
         if not student:

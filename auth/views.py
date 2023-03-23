@@ -16,6 +16,7 @@ blp = Blueprint('Admins', 'admins', description='Operation on Users')
 class AdminRegister(MethodView):
     @blp.arguments(AdminSignUpSchema)
     @blp.response(201, PlainAdminSchema)
+    @blp.doc(description='Sign up Admins')
     def post(self, admin_data):
 
         if check_last_email_char(admin_data["email"].lower()) != 'ui.edu.ng':
@@ -43,6 +44,7 @@ class AdminRegister(MethodView):
 @blp.route('/login')
 class Login(MethodView):
     @blp.arguments(LoginSchema)
+    @blp.doc(description='Login a user, Admin or Student')
     def post(self, user_data):
 
         if user_data['user_id'].startswith('ADMIN-UI'):
@@ -71,6 +73,7 @@ class Login(MethodView):
 @blp.route("/refresh")
 class TokenRefresh(MethodView):
     @jwt_required(refresh=True)
+    @blp.doc(description='Get an Access Token')
     def post(self):
         current_user = get_jwt_identity()
         new_token = create_access_token(identity=current_user, expires_delta=timedelta(hours=2))
@@ -81,6 +84,7 @@ class TokenRefresh(MethodView):
 @blp.route("/logout")
 class Logout(MethodView):
     @jwt_required()
+    @blp.doc(description='Logout')
     def post(self):
         jti = get_jwt()['jti']
         BLOCKLIST.add(jti)

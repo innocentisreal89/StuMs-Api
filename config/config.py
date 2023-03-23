@@ -2,7 +2,7 @@ import os
 from decouple import config
 from datetime import timedelta
 
-
+#   the path to our datatbase
 base_dir = os.path.dirname(os.path.realpath(__file__))
 
 #This has to do with the Prod. config, it is a replacement for the  'DATABASE_URL'  we had use already
