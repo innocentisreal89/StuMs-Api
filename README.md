@@ -109,13 +109,9 @@ This section should list any major frameworks/libraries used to bootstrap your p
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* Python3: 
-    ```sh
-    [Get Python](https://www.python.org/downloads/)
-    ```
+* Python3: [Get Python](https://www.python.org/downloads/)
 
 ### Installation
-
 
 1. Clone this repo
    ```sh
