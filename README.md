@@ -212,7 +212,7 @@ Project Link: [StuMs-API](https://github.com/innocentisreal89/StuMs-Api)<b>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+[linkedin-url]: https://img.shields.io/badge/in/israel-innocent-a76946230-1ca0f1?style=for-the-badge&logo=linkedin&logoColor=blue&link=https://www.linkdin.com/in/israel-innocent-a76946230
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
@@ -226,7 +226,8 @@ Project Link: [StuMs-API](https://github.com/innocentisreal89/StuMs-Api)<b>
 [issues-url]: https://github.com/innocentisreal89/StuMs-Api/issues
 [license-shield]: https://img.shields.io/github/license/innocentisreal89/StuMs-Api.svg?style=for-the-badge
 [license-url]: https://github.com/innocentisreal89/StuMs-Api/blob/main/LICENSE.txt
-[linkedin-url]: https://img.shields.io/badge/in/israel-innocent-a76946230-1ca0f1?style=for-the-badge&logo=linkedin&logoColor=blue&link=https://www.linkdin.com/in/israel-innocent-a76946230
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/israel-innocent
 [twitter-shield]: https://img.shields.io/badge/-@G_Science1-1ca0f1?style=for-the-badge&logo=twitter&logoColor=white&link=https://twitter.com/G_Science1
 [twitter-url]: https://twitter.com/G_Science1
 [python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
