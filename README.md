@@ -2,7 +2,7 @@
 
 <a name="readme-top"></a>
 
--->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -92,10 +92,10 @@ where the student has the priviledge to register for an available course and che
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Python][Python]][https://www.python.org/downloads/]
-* [![Flask][Flask]][Flask-url]
-* [![Flask-Smorest][Flask-Smorest]][Flask-Smorest-url]
-* [![SQlite][SQlite]][SQlite-url]
+* ![Python][Python]
+* ![Flask][Flask]
+* ![Flask-Smorest][Flask-Smorest]
+* ![SQlite][SQlite]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
