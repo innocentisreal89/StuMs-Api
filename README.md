@@ -212,7 +212,6 @@ Project Link: [StuMs-API](https://github.com/innocentisreal89/StuMs-Api)<b>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[linkedin-url]: https://img.shields.io/badge/in/israel-innocent-a76946230-1ca0f1?style=for-the-badge&logo=linkedin&logoColor=blue&link=https://www.linkdin.com/in/israel-innocent-a76946230
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
